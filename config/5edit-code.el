@@ -22,9 +22,7 @@
 (define-key company-active-map [tab] 'company-complete-selection)
 (define-key company-active-map [return] 'company-complete-common-or-cycle)
 
-(yas-global-mode t)
 (add-hook 'prog-mode-hook 'setup-code)
-
 (defun setup-code ()
   (setq indent-tabs-mode nil
         tab-width 2
@@ -37,31 +35,37 @@
   (hl-paren-mode t)
   (eldoc-mode t))
 
-;; create yasnippet
-(setq yas-new-snippet-default
-      "# name: $1
-       # ---
-       $0")
-
-(defun find-snippet ()
-  (interactive)
-  (let ((dir (concat (car (yas-snippet-dirs)) "/" (symbol-name major-mode) "/")) )
-    (find-file (read-string "snippet:" dir))
-    (snippet-mode)
-    (if (= 1 (point-max))
-        (yas-expand-snippet yas-new-snippet-default)
-      (beginning-of-buffer)
-      (search-forward "key:")
-      (end-of-line))))
-
-(define-key snippet-mode-map "C-H-M-S-s"
-  (lambda () (interactive)
-    (yas-load-snippet-buffer yas--guessed-modes)
-    (kill-buffer)))
-
 (defun comment-or-uncomment-region-or-line ()
   (interactive)
   (if (region-active-p)
       (setq beg (region-beginning) end (region-end))
     (setq beg (line-beginning-position) end (line-end-position)))
   (comment-or-uncomment-region beg end))
+
+;; snippet
+(yas-global-mode t)
+
+(setq yas-new-snippet-default
+      "#key: $1
+       # --
+       $0")
+
+(defun find-snippet ()
+  (interactive)
+  (let ((dir default-directory)
+        (yas-dir (concat (car (yas-snippet-dirs)) "/" (symbol-name major-mode) "/")))
+    (cd yas-dir)
+    (call-interactively 'helm-find-files)
+    (if (derived-mode-p 'fundamental-mode)
+        (snippet-mode)
+      (cd dir))
+    (if (= 1 (point-max))
+        (yas-expand-snippet yas-new-snippet-default)
+      (beginning-of-buffer)
+      (search-forward "key: ")
+      (end-of-line))))
+
+(bind-key "C-H-M-S"
+          (lambda () (interactive)
+            (yas-load-snippet-buffer-and-close (car (yas--compute-major-mode-and-parents buffer-file-name))))
+          snippet-mode-map)

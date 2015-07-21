@@ -54,7 +54,7 @@
 
 (setq-default
  mode-line-format '(:eval (render-mode-line (list mode-line-position "/ " (total-line) "  W" (total-word))
-                                            '(" " vc-mode mode-line-modes)))
+                                            '(" " vc-mode " " mode-line-modes)))
  sml-modeline-len 25)
 
 (defun render-mode-line (left right)

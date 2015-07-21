@@ -4,7 +4,7 @@
       helm-adapt t
       helm-adaptive-history-file "~/.emacs.d/persist/helm-adaptive-history"
       helm-echo-input-in-header-line t
-      recentf-max-saved-items 150
+      recentf-max-saved-items 20
       recentf-save-file "~/.emacs.d/persist/recentf"
       bookmark-default-file "~/.emacs.d/persist/bookmarks"
       projectile-require-project-root nil
