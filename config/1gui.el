@@ -14,9 +14,9 @@
 (when (display-graphic-p)
   (require 'highlight-tail)
   (setq highlight-tail-colors '(("#bc2525" . 0))
-        highlight-tail-steps 15
-        highlight-tail-timer 0.02
-        ighlight-tail-defaultbgcolor-timer nil)
+        highlight-tail-steps 10
+        ;; highlight-tail-timer 0.0
+        highlight-tail-defaultbgcolor-timer nil)
   (highlight-tail-mode t))
 
 ;; window

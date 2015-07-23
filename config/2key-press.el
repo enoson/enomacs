@@ -32,7 +32,7 @@
 (bind-key [escape] 'toggle-M-x)
 (defun toggle-M-x ()
   (interactive)
-  (if (use-region-p)
+  (if mark-active
       (deactivate-mark)
     (if popwin:popup-window
         (popwin:close-popup-window)

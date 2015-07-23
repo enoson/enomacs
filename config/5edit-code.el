@@ -18,6 +18,7 @@
       ac-comphist-file  "~/.emacs.d/persist/ac-comphist.dat"
       ac-trigger-commands '(backward-delete-char-untabify self-insert-command))
 
+(push 'backward-delete-char-untabify company-begin-commands)
 (define-key company-active-map [escape] 'company-abort)
 (define-key company-active-map [tab] 'company-complete-selection)
 (define-key company-active-map [return] 'company-complete-common-or-cycle)

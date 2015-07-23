@@ -35,10 +35,10 @@
  ("C-H-M-<return>". nil)
 
  ;; a
- ("C-H-s". eval-defun)
+ ("C-H-s". eno-word-copy)
  ("C-H-d". eval-buffer)
  ("C-H-f". avy-goto-char)
- ("C-H-k". eno-word-copy)
+ ("C-H-k". eval-defun)
  ("C-H-l". eno-word-cut)
  ("C-H-;". eno-word-paste)
  ("C-H-'". eno-word-goto)
@@ -59,7 +59,7 @@
  ("M-I". eno-symbol-copy)
  ("M-O". eno-symbol-cut)
  ("M-P". eno-symbol-paste)
- ("M-{". nil)
+ ("M-{". eno-symbol-swap)
  ("M-Q". mc/mark-all-like-this-in-defun)
  ("M-E". kill-buffer-and-window)
  ("M-V". nil)
